@@ -1,5 +1,6 @@
 # ship_shop
 
+# Tugas 7
 
 ## 1.  Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya. 
    - Stateless Widget adalah widget yang tidak memiliki perubahan status setelah pertama kali dirender. Sifatnya tetap, sehingga tidak bisa berubah atau memperbarui dirinya sendiri.
@@ -211,4 +212,108 @@ Selain tombol utama, aplikasi ini menampilkan informasi pengguna seperti NPM, na
    ```
 
 
+# Tugas 8
 
+## 1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya saya menggunakan const, dan kapan sebaiknya tidak digunakan?
+const di Flutter digunakan untuk mendeklarasikan objek atau widget yang nilainya tetap dan tidak berubah selama aplikasi berjalan. Keuntungan utama menggunakan const adalah:
+
+- Mengurangi Penggunaan Memori: Objek const hanya akan dibuat sekali dan digunakan kembali ketika dibutuhkan.
+- Meningkatkan Performa: Flutter tidak perlu membangun widget const berulang kali, yang dapat mengurangi waktu rendering.
+- Konsistensi: Menjamin bahwa objek yang sama digunakan setiap kali, sehingga menghindari pembuatan objek yang sama berulang kali.
+Penggunaan const sebaiknya dilakukan pada widget yang tidak berubah nilainya setelah dibuat, seperti widget statis (misalnya, teks atau ikon). Hindari menggunakan const untuk widget yang nilainya dinamis atau bergantung pada input pengguna.
+
+## 2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+- Column digunakan untuk menata widget secara vertikal (sumbu Y), sedangkan Row digunakan untuk menata widget secara horizontal (sumbu X).
+- Column sering digunakan untuk menata form input, daftar item, atau elemen UI lainnya yang lebih panjang, sementara Row cocok untuk menata elemen yang sejajar secara horizontal, seperti ikon atau tombol.
+
+Contoh Column:
+```dart
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+    Text('Item 1'),
+    Text('Item 2'),
+    Text('Item 3'),
+  ],
+)
+```
+
+Contoh Row:
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+    Icon(Icons.home),
+    Icon(Icons.search),
+    Icon(Icons.settings),
+  ],
+)
+```
+
+## 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+
+### Pada tugas ini, elemen input yang digunakan pada form adalah:
+- TextField: Digunakan untuk input teks, seperti nama produk dan deskripsi produk.
+- ElevatedButton: Digunakan sebagai tombol untuk mengirimkan form (misalnya, tombol untuk menambah produk).
+
+### Elemen input lain yang tidak digunakan dalam aplikasi ini, namun bisa digunakan untuk aplikasi lainnya adalah:
+- Checkbox: Digunakan untuk memilih ya/tidak.
+- Radio: Digunakan untuk memilih satu pilihan dari beberapa opsi.
+- DropdownButton: Digunakan untuk memilih opsi dari daftar.
+- /Slider: Untuk memilih nilai dalam rentang tertentu.
+
+## 4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Untuk mengatur tema dalam Flutter, gunakan ThemeData yang didefinisikan dalam properti theme pada MaterialApp. Tema ini mengatur warna, teks, dan banyak elemen visual lainnya secara global di seluruh aplikasi. dalam aplikasi ship-shop sebagai berikut.
+
+```dart
+MaterialApp(
+      title: 'Ship Shop',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.orange,
+        ).copyWith(secondary: Colors.deepOrange[400]),
+        useMaterial3: true,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/add-item': (context) => AddItemPage(),
+      },
+    )
+```
+
+## 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Navigasi dalam aplikasi Flutter ditangani menggunakan Navigator. Untuk berpindah dari satu halaman ke halaman lain, saya menggunakan Navigator.push dan untuk kembali ke halaman sebelumnya, saya menggunakan Navigator.pop. Pada aplikasi Ship Shop, navigasi dilakukan ketika pengguna menekan item tertentu di menu atau tombol tertentu di halaman utama.
+
+Contoh Implementasi Navigasi pada aplikasi Ship Shop:
+Untuk berpindah ke halaman baru (misalnya halaman "Tambah Produk"):
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => AddProductPage()),
+);
+```
+
+Untuk kembali ke halaman sebelumnya:
+
+```dart
+Navigator.pop(context);
+```
+
+Selain itu, untuk menggunakan named routes, saya bisa mendaftarkan rute di dalam MaterialApp:
+
+```dart
+MaterialApp(
+  routes: {
+    '/addProduct': (context) => AddProductPage(),
+  },
+)
+```
+
+Kemudian, navigasi dapat dilakukan dengan:
+
+```dart
+Navigator.pushNamed(context, '/addProduct');
+Dengan cara ini, saya dapat menangani navigasi antar halaman dengan mudah dan memastikan pengalaman pengguna yang baik pada aplikasi dengan banyak halaman.
+```
