@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ship_shop/screens/list_product.dart';
 import 'package:ship_shop/screens/menu.dart';
 import 'package:ship_shop/screens/product_form.dart';
 
@@ -27,7 +28,7 @@ class LeftDrawer extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Text(
-                  "Ayo beli kapal disini!",
+                  "Ayo jual kapal disini!",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
@@ -61,6 +62,18 @@ class LeftDrawer extends StatelessWidget {
                     builder: (context) => ProductFormPage(),
                   ));
             },
+          ),
+          ListTile(
+              leading: const Icon(Icons.add_reaction_rounded),
+              title: const Text('Daftar Mood'),
+              onTap: () {
+                // Route menu ke halaman mood
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductPage(),
+                  ));
+              },
           ),
         ],
       ),
