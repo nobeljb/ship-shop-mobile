@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ship_shop/widgets/left_drawer.dart';
-import 'package:ship_shop/widgets/mood_card.dart';
+import 'package:ship_shop/widgets/product_card.dart';
 
 class MyHomePage extends StatelessWidget {
   final String npm = '2306202826'; // NPM
