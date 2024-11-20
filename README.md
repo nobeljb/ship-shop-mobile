@@ -321,19 +321,21 @@ Dengan cara ini, saya dapat menangani navigasi antar halaman dengan mudah dan me
 # Tugas 9
 
 ## 1. Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
-Model membantu dalam memetakan data JSON ke objek Python, memudahkan manipulasi data dan memastikan integritas data. Tanpa model, kita harus mengelola data mentah secara manual, yang rentan terhadap kesalahan dan inkonsistensi.
+Model penting untuk memetakan data JSON ke objek Python secara langsung, yang mempermudah manipulasi data dan menjaga integritas serta validitas data. Model juga memungkinkan validasi otomatis dan pengelolaan tipe data dengan lebih efisien. Jika kita tidak membuat model, pengelolaan data harus dilakukan secara manual, yang meningkatkan risiko error seperti ketidakcocokan tipe data dan kesalahan penguraian struktur data. Meskipun tidak selalu terjadi error fatal tanpa model, penanganan data mentah lebih rentan terhadap bug dan membuat kode sulit dipelihara.
 
 ## 2. Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
-Library http digunakan untuk melakukan permintaan HTTP ke server, seperti GET dan POST, untuk mengambil atau mengirim data. Ini memungkinkan aplikasi Flutter untuk berkomunikasi dengan backend Django.
+Library http digunakan untuk mengirim permintaan HTTP dari aplikasi Flutter ke server, seperti GET, POST. Ini memungkinkan aplikasi untuk mengambil data dari server atau mengirim data ke server untuk diproses. Library ini berfungsi sebagai penghubung antara frontend (Flutter) dan backend (Django) untuk melakukan komunikasi data
 
 ## 3. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
-CookieRequest digunakan untuk mengelola sesi pengguna di Flutter, memastikan bahwa permintaan HTTP menyertakan cookie sesi yang valid. Instance CookieRequest perlu dibagikan ke semua komponen untuk menjaga konsistensi sesi dan autentikasi di seluruh aplikasi.
+CookieRequest digunakan untuk mengelola sesi pengguna dan menyertakan cookie sesi dalam permintaan HTTP, sehingga pengguna tetap terautentikasi di berbagai permintaan. Dengan membagikan instance CookieRequest ke semua komponen, sesi pengguna yang konsisten dapat dijaga di seluruh aplikasi. Ini penting agar pengguna tidak perlu login ulang saat berpindah halaman atau melakukan interaksi berbeda dalam aplikasi.
 
 ## 4. Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
-Data dikirim dari input pengguna di Flutter ke server Django melalui permintaan HTTP. Django memproses data dan mengembalikan respons dalam format JSON. Flutter kemudian menguraikan JSON dan menampilkan data di UI.
+Pengguna memasukkan data di aplikasi Flutter, kemudian data ini dikirim ke backend Django melalui permintaan HTTP (dalam ini POST). Django memproses data yang diterima (misalnya, menyimpan ke basis data atau memproses input), lalu mengembalikan respons dalam format JSON. Flutter menerima dan menguraikan JSON ini menggunakan library JSON parser, kemudian data ditampilkan di antarmuka pengguna (UI) sesuai kebutuhan.
 
 ## 5. Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
-Pengguna memasukkan data akun di Flutter, yang dikirim ke Django untuk registrasi atau login. Django memverifikasi data dan mengembalikan token sesi. Flutter menyimpan token ini dan menggunakannya untuk permintaan selanjutnya. Logout menghapus token sesi
+- Login/Register: Pengguna mengisi data akun di aplikasi Flutter dan data ini dikirim ke server Django melalui permintaan HTTP POST. Django memverifikasi data (memeriksa kecocokan dengan basis data untuk login atau menyimpan data baru untuk registrasi), lalu mengembalikan respons dengan token sesi (misalnya, cookie atau token JWT).
+- Menyimpan Token: Token sesi yang dikembalikan disimpan di sisi aplikasi Flutter (biasanya dalam memori atau storage lokal). Token ini digunakan untuk autentikasi di permintaan selanjutnya, sehingga server dapat mengenali pengguna.
+- Logout: Saat logout, Flutter mengirim permintaan ke endpoint logout Django, yang kemudian menghapus token sesi di server. Flutter juga menghapus token lokal, mengakhiri sesi pengguna dan mengembalikan pengguna ke halaman login atau halaman awal.
 
 ## 6. Implementasi checklist
 
